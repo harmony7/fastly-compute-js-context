@@ -1,4 +1,6 @@
-# @h7/fastly-compute-js-context
+# Fastly Compute Context Utility
+
+Surfaces Fastly Compute environment as a context object.
 
 ## License
 
