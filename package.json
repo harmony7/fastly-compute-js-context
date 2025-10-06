@@ -1,15 +1,15 @@
 {
-  "name": "@h7/fastly-compute-js-context",
-  "version": "0.2.0",
+  "name": "@fastly/compute-js-context",
+  "version": "0.3.0",
   "description": "Surfaces Fastly Compute environment as a context object",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/harmony7/fastly-compute-js-context.git"
+    "url": "git+https://github.com/fastly/compute-js-context.git"
   },
   "author": {
     "name": "Katsuyuki Omuro",
-    "email": "harmony7@pex2.jp"
+    "email": "komuro@fastly.com"
   },
   "type": "module",
   "main": "./build/index.js",
@@ -38,7 +38,8 @@
     "build/**/*.d.ts",
     "LICENSE",
     "README.md",
-    "CHANGELOG.md"
+    "CHANGELOG.md",
+    "SECURITY.md"
   ],
   "keywords": [
     "fastly",

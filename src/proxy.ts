@@ -1,3 +1,8 @@
+/*
+ * Copyright Fastly, Inc.
+ * Licensed under the MIT license. See LICENSE file for details.
+ */
+
 import type { Acl } from 'fastly:acl';
 import type { Backend } from 'fastly:backend';
 import type { ConfigStore } from 'fastly:config-store';
@@ -20,7 +25,7 @@ const BindingStringToContextKeyMapping = {
 } as const;
 export type ResourceType = keyof typeof BindingStringToContextKeyMapping;
 export type BindingsString = Defs<ResourceType>;
-export type EnvBindingsDefs = Record<string, BindingsString>;
+export type BindingsDefs = Record<string, BindingsString>;
 
 type BindingStringToResourceInstanceTypeMapping = {
   Acl: Acl;
@@ -37,7 +42,7 @@ export type ResourceInstance<T> =
     ? BindingStringToResourceInstanceTypeMapping[K]
     : never;
 
-export type BuildBindings<T extends EnvBindingsDefs> = {
+export type ContextProxy<T extends BindingsDefs> = {
   [K in keyof T]: ResourceInstance<T[K]>;
 };
 
@@ -58,10 +63,10 @@ function getResourceName(key: string, typeName: string) {
   return seg ?? key;
 }
 
-export function buildEnvironment<T extends EnvBindingsDefs>(
+export function buildContextProxy<T extends BindingsDefs>(
   context: Context,
-  envBindingsDefs: T
-): BuildBindings<T> {
+  bindingsDefs: T
+): ContextProxy<T> {
   const target: Record<string, unknown> = {};
 
   const getEntry = (key: string | symbol) => {
@@ -69,7 +74,7 @@ export function buildEnvironment<T extends EnvBindingsDefs>(
       return undefined;
     }
 
-    const typeName = envBindingsDefs[key];
+    const typeName = bindingsDefs[key];
     const resourceType = getResourceType(typeName);
     if (resourceType == null) {
       return undefined;
@@ -92,5 +97,5 @@ export function buildEnvironment<T extends EnvBindingsDefs>(
     },
   };
 
-  return new Proxy(target, handler) as unknown as BuildBindings<T>;
+  return new Proxy(target, handler) as unknown as ContextProxy<T>;
 }

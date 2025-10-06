@@ -1,3 +1,8 @@
+/*
+ * Copyright Fastly, Inc.
+ * Licensed under the MIT license. See LICENSE file for details.
+ */
+
 import { Acl } from 'fastly:acl';
 import { loadOptionalStringMap, type ReadonlyOptionalMap } from "./util.js";
 

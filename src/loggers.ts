@@ -1,3 +1,8 @@
+/*
+ * Copyright Fastly, Inc.
+ * Licensed under the MIT license. See LICENSE file for details.
+ */
+
 import { Logger } from 'fastly:logger';
 import { loadOptionalStringMap, type ReadonlyOptionalMap } from './util.js';
 
