@@ -1,7 +1,7 @@
-/**
- * @h7/fastly-compute-js-context
- * May be used under the MIT License
+/*
+ * Copyright Fastly, Inc.
+ * Licensed under the MIT license. See LICENSE file for details.
  */
 
 export * from './context.js';
-export * from './bindings.js';
+export * from './proxy.js';

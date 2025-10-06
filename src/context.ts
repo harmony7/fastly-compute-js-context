@@ -1,3 +1,8 @@
+/*
+ * Copyright Fastly, Inc.
+ * Licensed under the MIT license. See LICENSE file for details.
+ */
+
 import { createAcls, type Acls } from './acls.js';
 import { createBackends, type Backends } from './backends.js';
 import { createConfigStores, type ConfigStores } from './config-stores.js';

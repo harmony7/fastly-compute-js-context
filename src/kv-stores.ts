@@ -1,3 +1,8 @@
+/*
+ * Copyright Fastly, Inc.
+ * Licensed under the MIT license. See LICENSE file for details.
+ */
+
 import { KVStore } from 'fastly:kv-store';
 import { loadOptionalStringMap, type ReadonlyOptionalMap } from './util.js';
 

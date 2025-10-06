@@ -1,3 +1,8 @@
+/*
+ * Copyright Fastly, Inc.
+ * Licensed under the MIT license. See LICENSE file for details.
+ */
+
 export type ReadonlyOptionalMap<T> = Readonly<Record<string, T | undefined>>;
 
 export function loadOptionalStringMap<T>(getter: (key: string) => T | undefined) {
