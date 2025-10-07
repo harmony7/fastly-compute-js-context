@@ -42,9 +42,11 @@ export type ResourceInstance<T> =
     ? BindingStringToResourceInstanceTypeMapping[K]
     : never;
 
-export type ContextProxy<T extends BindingsDefs> = {
-  [K in keyof T]: ResourceInstance<T[K]>;
-};
+export type ContextProxy<T extends BindingsDefs> = keyof T extends never ?
+  Record<string, never> :
+  {
+    [K in keyof T]: ResourceInstance<T[K]>;
+  };
 
 function isResourceType(resourceType: string): resourceType is ResourceType {
   return resourceType in BindingStringToContextKeyMapping;
