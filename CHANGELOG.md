@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [unreleased]
 
+## [0.4.2] - 2025-10-08
+
 ### Fixed
 
 - Fix typing of Proxy when bindings are empty
@@ -23,6 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial public release
 
-[unreleased]: https://github.com/fastly/compute-js-context/compare/v0.4.1...HEAD
+[unreleased]: https://github.com/fastly/compute-js-context/compare/v0.4.2...HEAD
+[0.4.2]: https://github.com/fastly/compute-js-context/compare/v0.4.1...v0.4.2
 [0.4.1]: https://github.com/fastly/compute-js-context/compare/v0.2.0...v0.4.1
 [0.2.0]: https://github.com/fastly/compute-js-context/releases/tag/v0.2.0
