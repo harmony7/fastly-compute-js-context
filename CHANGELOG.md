@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [unreleased]
 
+### Added
+
+- Make proxy object possible to extend an existing object
+
 ## [0.4.2] - 2025-10-08
 
 ### Fixed

@@ -65,17 +65,16 @@ function getResourceName(key: string, typeName: string) {
   return seg ?? key;
 }
 
-export function buildContextProxy<T extends BindingsDefs>(
+export function buildContextProxyOn<TTarget extends object, T extends BindingsDefs>(
+  target: TTarget,
   context: Context,
   bindingsDefs: T
-): ContextProxy<T> {
-  const target: Record<string, unknown> = {};
+) {
 
   const getEntry = (key: string | symbol) => {
-    if (typeof key !== "string") {
+    if (typeof key !== "string" || !(key in bindingsDefs)) {
       return undefined;
     }
-
     const typeName = bindingsDefs[key];
     const resourceType = getResourceType(typeName);
     if (resourceType == null) {
@@ -91,13 +90,33 @@ export function buildContextProxy<T extends BindingsDefs>(
   };
 
   const handler: ProxyHandler<typeof target> = {
-    get(_, key) {
-      return getEntry(key);
+    get(target, key, receiver) {
+      if (typeof key !== "string") {
+        return Reflect.get(target, key, receiver);
+      }
+      const entry = getEntry(key);
+      if (entry !== undefined) {
+        return entry;
+      }
+      return Reflect.get(target, key, receiver);
     },
-    has(_, key) {
-      return getEntry(key) !== undefined;
+    has(target, key) {
+      if (typeof key !== "string") {
+        return Reflect.has(target, key);
+      }
+      if (getEntry(key) !== undefined) {
+        return true;
+      }
+      return Reflect.has(target, key);
     },
   };
 
-  return new Proxy(target, handler) as unknown as ContextProxy<T>;
+  return new Proxy(target, handler) as unknown as (TTarget & ContextProxy<T>);
+}
+
+export function buildContextProxy<T extends BindingsDefs>(
+  context: Context,
+  bindingsDefs: T
+): ContextProxy<T> {
+  return buildContextProxyOn({}, context, bindingsDefs);
 }
