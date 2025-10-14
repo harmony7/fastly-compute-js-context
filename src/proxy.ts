@@ -9,7 +9,7 @@ import type { ConfigStore } from 'fastly:config-store';
 import type { KVStore } from 'fastly:kv-store';
 import type { Logger } from 'fastly:logger';
 import type { SecretStore } from 'fastly:secret-store';
-import type { Context } from './index.js';
+import { Context, createContext } from './index.js';
 
 type Def<T extends string> = T | `${T}:${string}`;
 type Defs<T extends string> = T extends string ? Def<T> : never;
@@ -67,9 +67,9 @@ function getResourceName(key: string, typeName: string) {
 
 export function buildContextProxyOn<TTarget extends object, T extends BindingsDefs>(
   target: TTarget,
-  context: Context,
   bindingsDefs: T
 ) {
+  const context = createContext();
 
   const getEntry = (key: string | symbol) => {
     if (typeof key !== "string" || !(key in bindingsDefs)) {
@@ -115,8 +115,7 @@ export function buildContextProxyOn<TTarget extends object, T extends BindingsDe
 }
 
 export function buildContextProxy<T extends BindingsDefs>(
-  context: Context,
   bindingsDefs: T
 ): ContextProxy<T> {
-  return buildContextProxyOn({}, context, bindingsDefs);
+  return buildContextProxyOn({}, bindingsDefs);
 }
