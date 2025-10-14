@@ -80,7 +80,7 @@ Then, pass these definitions to `buildContextProxy()`.
 
 ```typescript
 /// <reference types="@fastly/js-compute" />
-import { createContext, buildContextProxy, type BindingsDefs } from '@fastly/compute-js-context';
+import { buildContextProxy, type BindingsDefs } from '@fastly/compute-js-context';
 
 // Define your application's bindings
 const bindingsDefs = {
@@ -99,10 +99,8 @@ type Bindings = ContextProxy<typeof bindingsDefs>;
 
 addEventListener('fetch', (event) => event.respondWith(handler(event)));
 async function handler(event: FetchEvent): Promise<Response> {
-  const ctx = createContext();
-  
   // Create the typed environment
-  const bindings: Bindings = buildContextProxy(ctx, bindingsDefs);
+  const bindings: Bindings = buildContextProxy(bindingsDefs);
 
   // Now use your custom bindings!
   const asset = await bindings.assets?.get('/index.html');
