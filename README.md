@@ -1,3 +1,9 @@
+# Archived
+
+Ownership of this package has been transferred to Fastly at https://github.com/fastly/compute-js-context.
+
+This repository is no longer maintained, but is left here for reference.
+
 # Fastly Compute Context Utility
 
 by Katsuyuki Omuro (harmony7@pex2.jp)
